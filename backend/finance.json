@@ -1,0 +1,32 @@
+{
+    "spendings": {
+      "Water": {
+        "amount": 65
+      },
+      "Electricity": {
+        "amount": 55
+      },
+      "Rent": {
+        "amount": 800
+      },
+      "CTAX": {
+        "amount": 160
+      },
+      "Vodafone": {
+        "amount": 46
+      },
+      "foodetc": {
+        "amount": 300
+      }
+    },
+  
+    "income": {
+      "oli": {
+        "work": 1500
+      },
+      "vanessa": {
+        "work": 400
+      }
+    }
+  }
+  
