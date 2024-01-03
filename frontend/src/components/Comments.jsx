@@ -11,13 +11,16 @@ function Comments(props) {
   });
 
   const handlePostComment = async () => {
-    const response = await fetch("http://localhost:3333/api/comments", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ comment: comment(), token: token() }),
-    });
+    const response = await fetch(
+      "https://oliborozynski.ddns.net/api/comments",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ comment: comment(), token: token() }),
+      }
+    );
 
     if (response.ok) {
       const responseData = await response.json();

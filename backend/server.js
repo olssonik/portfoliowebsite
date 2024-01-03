@@ -3,6 +3,7 @@ const app = express();
 const cors = require("cors");
 const financejson = require("./finance.json");
 require("dotenv").config();
+
 app.use(cors(), express.json());
 
 function generateRandomString() {
@@ -68,7 +69,6 @@ let comments = [];
 app.post("/api/comments", function (req, res) {
   const postData = req.body;
   let jwtdata = postData.token;
-  console.log(jwtdata);
 
   if (jwtdata == token) {
     if (postData) {
@@ -90,13 +90,6 @@ app.post("/api/blogpost", (req, res) => {
   console.log(postData);
   if (jwtdata == token) {
     if (postData) {
-      const fs = require("fs");
-      const blogFilePath = "./blog.json.js"; // Correct variable name
-      const blogFile = require(blogFilePath);
-
-      // Assuming postData is defined somewhere
-      let date = postData.date; // Correct variable name
-      let title = postData.title;
       let content = postData.content;
 
       const entryTemplate = (date, title, content) => {
@@ -106,10 +99,6 @@ app.post("/api/blogpost", (req, res) => {
           content: content,
         };
       };
-
-      const newEntry = entryTemplate(date, title, content);
-
-      blogFile.posts.push(JSON.stringify(newEntry));
 
       res.json({ blogFile });
     } else {

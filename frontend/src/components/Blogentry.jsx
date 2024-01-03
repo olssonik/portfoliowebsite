@@ -8,18 +8,19 @@ function Blogentry(props) {
   });
 
   const handlePostBlog = async () => {
-    const response = await fetch("http://localhost:3333/api/blogpost", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        date: "01/01/2023",
-        title: "TEST",
-        content: "content",
-        token: token(),
-      }),
-    });
+    const response = await fetch(
+      "https://oliborozynski.ddns.net/api/blogpost",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          content: "content",
+          token: token(),
+        }),
+      }
+    );
 
     if (response.ok) {
       const responseData = await response.json();

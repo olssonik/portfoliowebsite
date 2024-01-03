@@ -11,7 +11,7 @@ function Admin() {
 
   const handleAuth = async (pass) => {
     try {
-      const response = await fetch("http://localhost:3333/api/auth", {
+      const response = await fetch("https://oliborozynski.ddns.net/api/auth", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

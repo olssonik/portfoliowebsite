@@ -14,7 +14,7 @@ function Api(props) {
 
     try {
       // Fetch data from JSONPlaceholder todos endpoint
-      const response = await fetch("http://localhost:3333/api/test", {
+      const response = await fetch("https://oliborozynski.ddns.net/api/test", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

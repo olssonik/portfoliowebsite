@@ -17,7 +17,7 @@ function Finance(props) {
       setIncome(JSON.stringify(fjs.financejson.income));
     }
 
-    const response = await fetch("http://localhost:3333/api/finance", {
+    const response = await fetch("http://oliborozynski.ddns.net/api/finance", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
