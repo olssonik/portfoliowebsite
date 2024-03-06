@@ -1,10 +1,22 @@
-const express = require("express");
-const app = express();
+const express = require('express');
+const https = require('https');
+const fs = require('fs');
 const cors = require("cors");
 const financejson = require("./finance.json");
+const blogposts = require("./posts.json");
 require("dotenv").config();
+const blogposts = require("./posts.json");
 
-app.use(cors(), express.json());
+const app = express();
+const port = 3000;
+
+const options = {
+  key: fs.readFileSync('/etc/letsencrypt/live/oliborozynski.ddns.net/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/oliborozynski.ddns.net/fullchain.pem'),
+};
+app.use(cors(), express.json(), express.static('public'));
+
+
 
 function generateRandomString() {
   const characters =
@@ -64,8 +76,6 @@ app.post("/api/finance", (req, res) => {
   }
 });
 
-let comments = [];
-
 app.post("/api/comments", function (req, res) {
   const postData = req.body;
   let jwtdata = postData.token;
@@ -87,20 +97,55 @@ app.post("/api/blogpost", (req, res) => {
 
   let jwtdata = postData.token;
 
-  console.log(postData);
   if (jwtdata == token) {
     if (postData) {
-      let content = postData.content;
+      const currentDate = new Date();
+      const options = {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+        timeZone: "Europe/London",
+      };
+      const dateFormatter = new Intl.DateTimeFormat("en-GB", options);
+      const formattedDate = dateFormatter.format(currentDate);
 
-      const entryTemplate = (date, title, content) => {
+      let content = postData.content;
+      let title = postData.title;
+
+      const createEntry = (date, title, content) => {
         return {
           date: date,
           title: title,
           content: content,
         };
       };
+      const entry = createEntry(formattedDate, title, content);
 
-      res.json({ blogFile });
+      const fs = require("fs");
+      const filePath = "posts.json";
+
+      fs.readFile(filePath, "utf8", (err, data) => {
+        if (err) {
+          console.error("Error reading file:", err);
+        } else {
+          const existingPosts = JSON.parse(data);
+
+          existingPosts.push(entry);
+
+          const updatedJsonString = JSON.stringify(existingPosts, null, 2);
+
+          fs.writeFile(filePath, updatedJsonString, (err) => {
+            if (err) {
+              console.error("Error writing to file:", err);
+            }
+          });
+        }
+      });
+
+      res.json({ data: "net" });
     } else {
       res.status(400).json({ error: "Invalid request body" });
     }
@@ -109,4 +154,12 @@ app.post("/api/blogpost", (req, res) => {
   }
 });
 
-app.listen(3333);
+app.get("/api/blogposts", (req, res) => {
+  res.json({ blogposts });
+});
+
+
+const server = https.createServer(options, app);
+server.listen(port, () => {
+  console.log(`Server is running at https://localhost:${port}`);
+});

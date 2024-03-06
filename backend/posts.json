@@ -1,0 +1,12 @@
+[
+  {
+    "date": "10/01/2024, 12:44",
+    "title": "First Entry",
+    "content": "Im intending this to be the first entry, Im currently writing this in vscode, and not as im planning in the blog section of my admin page. I hope I can maybe include images in theese blogs later on. Next entry will definetly be posted thru the admin page, I dont think I explained yet what am I even trying to do, Im very bad at writing not only code but essays aswel. I created a posts.json file in which im storing this post in and I want to add posts to this file thru API, but its bit tricky because fs.write method never seems to work for me unless i spend 3 hours distracting myself and coming back to what i was doing. anyway I will show some pictures and stuff once im done with this, hopefully see you in next post already written not in vscode but as intended on my admin page :)"
+  },
+  {
+    "date": "29/02/2024, 18:08",
+    "title": "How is it going...",
+    "content": "I started working on new projects like: Docker, SQL, C, CPP and python because I felt like I don`t show enough proof that I can use other languages than javascript. So I did work on other stuff, the only problem is that I dont have good ideas while working in different languages, I like creating websites and stupid javascript prograams because it`s fun. Anyways I just thought that even if I create some general usage of Docker, build a database from nothing or test code with python I will be able to show my skills. So I did, visit my portfolio section of the website and take a look if you feel like laughing at my probably visible and stupid mistakes :)"
+  }
+]
